@@ -1,0 +1,53 @@
+#!/bin/bash
+
+SMP=auto
+ERL_MAX_PORTS=36000
+ERL_PROCESSES=102400
+ERL_MAX_ETS_TABLES=1400
+
+NODE_NAME=erldanmu
+COOKIE=123456
+NODE=$NODE_NAME@localhost
+
+WERL=werl2
+
+ERLANG_OPTS="-smp $SMP +P $ERL_PROCESSES "
+create_erlang_opts(){
+    for arg; do
+        case $1 in
+            -c|--setcookie) 
+                ERLANG_OPTS="$ERLANG_OPTS -setcookie $2"
+                shift;;
+            -pa) 
+                ERLANG_OPTS="$ERLANG_OPTS -pa $2" 
+                shift;;
+            -boot) 
+                ERLANG_OPTS="$ERLANG_OPTS -boot $2" 
+                shift;;
+            -config) 
+                ERLANG_OPTS="$ERLANG_OPTS -config $2" 
+                shift;;
+            -s) 
+                ERLANG_OPTS="$ERLANG_OPTS -s $2 $3" 
+                shift 2 ;;
+            -remsh)
+                ERLANG_OPTS="$ERLANG_OPTS -remsh $NODE"
+                ;;
+            *) break;;
+        esac
+        shift
+    done
+}
+
+start(){
+    cd ../ebin
+    create_erlang_opts -c $COOKIE -s erldanmu_app start
+    $WERL -name $NODE $ERLANG_OPTS &
+}
+
+case $1 in
+    start)
+        start;;
+    *) 
+        break;;
+esac

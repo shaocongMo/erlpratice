@@ -1,0 +1,9 @@
+{application,erldanmu,
+             [{description,[]},
+              {vsn,"1"},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {mod,{erldanmu_app,[]}},
+              {env,[]},
+              {modules,[erldanmu_app,erldanmu_sup,l_service_douyu,m_danmu,
+                        m_timer,test]}]}.
