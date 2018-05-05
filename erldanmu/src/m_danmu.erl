@@ -141,12 +141,12 @@ handle_info({tcp, Socket, Data}, #state{socket = Socket, service_mod = Mod} = St
     Mod:analyze_data(list_to_binary(Data)),
     {noreply, State};
 
-handle_info({tcp_closed, _Socket}, #state{host = Host, port = Port, service_mod = Mod, room_id = RoomId} = State) ->
-    %% 不知道为什么有时候会断掉，怀疑是心跳问题
-    {ok, NewSocket} = gen_tcp:connect(Host, Port, []),
-    Mod:login(NewSocket, RoomId),
-    gen_tcp:controlling_process(NewSocket, self()),
-    {noreply, State#state{socket = NewSocket}};
+% handle_info({tcp_closed, _Socket}, #state{host = Host, port = Port, service_mod = Mod, room_id = RoomId} = State) ->
+%     %% 不知道为什么有时候会断掉，怀疑是心跳问题
+%     {ok, NewSocket} = gen_tcp:connect(Host, Port, []),
+%     Mod:login(NewSocket, RoomId),
+%     gen_tcp:controlling_process(NewSocket, self()),
+%     {noreply, State#state{socket = NewSocket}};
 
 handle_info(Info, State) ->
     ?PRINT("info: ~p~n", [Info]),

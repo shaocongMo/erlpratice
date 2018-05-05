@@ -9,7 +9,7 @@
 
 douyu() ->
     % Url = "https://www.douyu.com/dasima",
-    RoomId = 9999,
+    RoomId = 1385569,
     m_danmu:start(l_service_douyu, RoomId).
 
 %% ====================================================================

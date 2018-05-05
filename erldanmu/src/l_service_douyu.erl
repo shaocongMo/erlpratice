@@ -1,5 +1,6 @@
 -module(l_service_douyu).
 
+% -define(HOST, "openbarrage.douyutv.com").
 -define(HOST, "danmuproxy.douyu.com").
 -define(PROT, 8601).
 
@@ -41,8 +42,12 @@ login(Socket, RoomId) ->
 
 heart(Socket) ->
     erlang:send_after(?HEART_TIME, self(), {heart}),
+    % 旧版心跳
     Now =  m_timer:now_seconds(),
-    HeartData = lists:flatten(io_lib:format("type@=keeplive/tick@=~p/", [Now])),
+    OldHeartData = lists:flatten(io_lib:format("type@=keeplive/tick@=~p/", [Now])),
+    send(Socket, OldHeartData),
+    % 新版心跳
+    HeartData = "type@=mrkl/",
     send(Socket, HeartData).
 
 logout(Socket) ->
