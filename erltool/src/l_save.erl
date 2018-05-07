@@ -45,7 +45,7 @@ save_1([{DicName, Field} | L]) ->
     save_1(L).
 
 save_2(DicName, Field1, Field2) ->
-    case l_tool:get_dic(DicName) of
+    case get_dic(DicName) of
         Dic when is_list(Dic) ->
             save_list(DicName, Dic, Field1, Field2);
         Dic ->
@@ -53,7 +53,7 @@ save_2(DicName, Field1, Field2) ->
     end.
 
 save_3(DicName, Field) ->
-    case l_tool:get_dic(DicName) of
+    case get_dic(DicName) of
         Dic when is_list(Dic) ->
             save_list(DicName, Dic, Field);
         Dic ->
@@ -69,6 +69,7 @@ save_3(DicName, Field) ->
                 _:Reason ->
                     io:format("Error Reason: ~p~n", [Reason]),
                     skip
+            end
     end.
 
 
@@ -145,3 +146,11 @@ save_record(DicName, Record, Field1, Field2) ->
 get_record_name(Record) ->
     %% In the record, the first for the record name
     erlang:element(1, Record).
+
+get_dic(DicName) ->
+    case get(DicName) of
+        undefined ->
+            [];
+        Info ->
+            Info
+    end.
