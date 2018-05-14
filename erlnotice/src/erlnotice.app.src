@@ -1,0 +1,20 @@
+{application, erlnotice,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { erlnotice_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[
+        {mail, [{account, "e@mail.com"},
+                {password, "password"},
+                {smtp, "smtp.163.com"}]}
+        ]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.

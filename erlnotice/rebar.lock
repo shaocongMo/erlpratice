@@ -1,0 +1,4 @@
+[{<<"gen_smtp">>,
+  {git,"https://github.com/Vagabond/gen_smtp.git",
+       {ref,"263b29241666f676f7979f7c6b156d8fe1e69f59"}},
+  0}].

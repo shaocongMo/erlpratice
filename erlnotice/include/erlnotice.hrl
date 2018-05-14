@@ -1,0 +1,2 @@
+-define (PRINT (Msg), io:format(Msg)).
+-define (PRINT(Format, Args), io:format(Format, Args)).
