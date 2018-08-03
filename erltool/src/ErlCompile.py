@@ -28,7 +28,7 @@ class ErlCompile():
                     if os.path.isfile(file_path) and file_path.endswith(self.file_type):
                         file_info = os.stat(file_path)
                         if file_info.st_mtime > now - self.change_time and file_info.st_mtime < now + self.change_time:
-                            mods.append(file_path.replace(src_path + '/', ''))
+                            mods.append(file_path)
         return mods
 
     def __create_emakefile__(self, mods):
